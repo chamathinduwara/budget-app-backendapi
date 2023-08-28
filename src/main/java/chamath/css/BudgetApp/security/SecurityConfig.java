@@ -23,8 +23,8 @@ public class SecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFil
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
         http.
-                csrf(C -> C.disable())
-                .authorizeHttpRequests(A -> A.requestMatchers("")
+                csrf(c -> c.disable())
+                .authorizeHttpRequests(a -> a.requestMatchers("")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
