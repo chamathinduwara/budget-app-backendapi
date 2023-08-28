@@ -1,4 +1,4 @@
-package chamath.css.BudgetApp.security;
+package chamath.css.BudgetApp.config;
 
 import chamath.css.BudgetApp.jwt.JWTAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -24,15 +24,16 @@ public class SecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFil
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception {
         http.
                 csrf(c -> c.disable())
-                .authorizeHttpRequests(a -> a.requestMatchers("")
+                .authorizeHttpRequests(a -> a.requestMatchers("/api/v1/auth/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(sess -> sess.sessionCreationPolicy((SessionCreationPolicy.STATELESS)))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
 
     }
+
 }
